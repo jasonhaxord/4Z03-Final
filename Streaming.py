@@ -4,7 +4,7 @@ import serial
 
 from scipy.signal import find_peaks
 
-arduinoData = serial.Serial('com3', 115200)
+arduinoData = serial.Serial('com3', 115200) 
 
 start_time = time.time()
 programRunTime = time.time() - start_time
