@@ -1,4 +1,4 @@
-# Gate Analysis
+# Gait Analysis
 
 Tony said "i'll worry about this later" so leaving the readme blank
 
@@ -8,5 +8,4 @@ Tony's TODO:
 
 - [ ] edit readme.md
 - [ ] implement audio playback
-Alan's TODO:
-- [ ] finish 2 sensor peak detection logic
+
