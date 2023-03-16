@@ -9,3 +9,6 @@ Tony's TODO:
 - [ ] edit readme.md
 - [ ] implement audio playback
 
+Alan's TODO:
+- [ ] 2 sensor peak detection 
+- [ ] 2 sensor gait rhythm
