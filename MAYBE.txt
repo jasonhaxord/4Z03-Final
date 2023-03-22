@@ -1,0 +1,60 @@
+#include <Wire.h>
+#include <SparkFun_Multiplexer_TCA9548A_Arduino_Library.h> // Click here to get the library: http://librarymanager/All#SparkFun_TCA9548A
+#include "SparkFun_BNO080_Arduino_Library.h" // Click here to get the library: http://librarymanager/All#SparkFun_BNO080
+
+TCA9548A mux;
+BNO080 imu1;
+BNO080 imu2;
+
+void setup()
+{
+  Serial.begin(115200);
+
+  Wire.begin();
+  mux.begin();
+  imu1.begin();
+  imu2.begin();
+
+  Wire.setClock(400000); //Increase I2C data rate to 400kHz
+
+  mux.setChannel(0); // Select channel 0 on the mux for the first accelerometer
+  imu1.enableAccelerometer(500); // Send data update every 500ms for the first accelerometer
+
+  mux.setChannel(1); // Select channel 1 on the mux for the second accelerometer
+  imu2.enableAccelerometer(500); // Send data update every 500ms for the second accelerometer
+}
+
+void loop()
+{
+  // Read data from the first accelerometer
+  mux.setChannel(0); // Select the first accelerometer connected to the mux
+  if (imu1.dataAvailable() == true)
+  {
+    float x1 = imu1.getAccelX();
+    float y1 = imu1.getAccelY();
+    float z1 = imu1.getAccelZ();
+
+    float resultant1 = sqrt(x1 * x1 + y1 * y1 + z1 * z1);
+
+    Serial.print("Accelerometer 1: ");
+    Serial.print(resultant1/9.81, 4);
+    Serial.println(" m/s^2");
+  }
+
+  // Read data from the second accelerometer
+  mux.setChannel(1); // Select the second accelerometer connected to the mux
+  if (imu2.dataAvailable() == true)
+  {
+    float x2 = imu2.getAccelX();
+    float y2 = imu2.getAccelY();
+    float z2 = imu2.getAccelZ();
+
+    float resultant2 = sqrt(x2 * x2 + y2 * y2 + z2 * z2);
+
+    Serial.print("Accelerometer 2: ");
+    Serial.print(resultant2/9.81, 4);
+    Serial.println(" m/s^2");
+  }
+}
+
+
