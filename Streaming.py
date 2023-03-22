@@ -25,7 +25,7 @@ while True:
     while not arduinoData.inWaiting():
         pass
 
-    dataPacket = float(str(arduinoData.readline(), 'utf-8').strip()) / 9.81  # Get and clean reply
+    dataPacket = float(str(arduinoData.readline(), 'utf-8').strip())  # Get and clean reply
 
     combined_array[dataPacket] = currentTime
 
