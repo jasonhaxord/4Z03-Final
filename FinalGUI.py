@@ -8,7 +8,7 @@ import tkinter as tk
 from tkinter import ttk
 import threading
 #holy mother of imports
-bpm = 0
+bpm = 0 #if i delete this it no workey so ima not delete it
 CHUNK = 1024 #idk dont change this
 wf = wave.open("sample2.wav", 'rb') #reads .wav file
 p = pyaudio.PyAudio()
