@@ -120,8 +120,8 @@ def main():
         print(gender)
         print(age)
 
-        if gender == "Female":
-            if age < 70:
+        if gender == "Female": #check for gender & age
+            if age < 70: #default to highest recorded gait speed in paper if age is younger than 70
                 update_bpm(113)
             if age > 70 & age < 75:
                 update_bpm(113)
@@ -131,9 +131,9 @@ def main():
                 update_bpm(110)
             if age > 85:
                 update_bpm(108)
-
-        else:
-            if age < 70:
+      
+        else: #please don't cancel me, the paper only has 2 genders
+            if age < 70: #default to highest recorded gait speed in paper if age is younger than 70
                 update_bpm(102)
             if age > 70 & age < 75:
                 update_bpm(102)
