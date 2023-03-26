@@ -7,7 +7,7 @@ Tony will never get around to changing this file so a checklist will be added.
 Tony's TODO:
 
 - [ ] edit readme.md
-- [ ] implement audio playback
+- [ x] implement audio playback
 
 Alan's TODO:
 - [ ] 2 sensor peak detection 
