@@ -111,38 +111,38 @@ def main():
     root.title('Gait Rhythm Trainer ver 0.1')
     root.iconbitmap("icon.ico")
 
-    def save_data():
+        def save_data():
+        if not running:
+            age = int(age_entry.get())
+            gender = str(gender_var.get())
 
-        age = int(age_entry.get())
-        gender = str(gender_var.get())
+            # Do something with the data
+            print(gender)
+            print(age)
 
-        # Do something with the data
-        print(gender)
-        print(age)
+            if gender == "Female":
+                if age < 70:
+                    update_bpm(113)
+                if age > 70 & age < 75:
+                    update_bpm(113)
+                if age > 75 & age < 80:
+                    update_bpm(114)
+                if age > 80 & age < 85:
+                    update_bpm(110)
+                if age > 85:
+                    update_bpm(108)
 
-        if gender == "Female": #check for gender & age
-            if age < 70: #default to highest recorded gait speed in paper if age is younger than 70
-                update_bpm(113)
-            if age > 70 & age < 75:
-                update_bpm(113)
-            if age > 75 & age < 80:
-                update_bpm(114)
-            if age > 80 & age < 85:
-                update_bpm(110)
-            if age > 85:
-                update_bpm(108)
-      
-        else: #please don't cancel me, the paper only has 2 genders
-            if age < 70: #default to highest recorded gait speed in paper if age is younger than 70
-                update_bpm(102)
-            if age > 70 & age < 75:
-                update_bpm(102)
-            if age > 75 & age < 80:
-                update_bpm(106)
-            if age > 80 & age < 85:
-                update_bpm(103)
-            if age > 85:
-                update_bpm(102)
+            else:
+                if age < 70:
+                    update_bpm(102)
+                if age > 70 & age < 75:
+                    update_bpm(102)
+                if age > 75 & age < 80:
+                    update_bpm(106)
+                if age > 80 & age < 85:
+                    update_bpm(103)
+                if age > 85:
+                    update_bpm(102)
 
         # Clear the input fields
 
