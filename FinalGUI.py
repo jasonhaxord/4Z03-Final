@@ -91,7 +91,7 @@ def analyze_arduino():
             analyseAccelData()
             combined_array.clear()  # clears the acceleration + time array so we don't explode computers after a few minutes of running
             last_time = current_time  # update the current time for the next cycle
-            counter += 1  # count 3 of these 10 second cycles, after 3 will average out all the differences between times and give you avg bpm
+            counter += 1  # count 3 peaks, after 3 will average out all the differences between times and give you avg bpm
             if counter >= 3 and len(all_peak_times) >= 2:
                 average_difference = sum(
                     [all_peak_times[_tmp_] - all_peak_times[_tmp_ - 1] for _tmp_ in range(1, len(all_peak_times))]) / (
