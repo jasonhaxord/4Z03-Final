@@ -112,7 +112,7 @@ def main():
     root.iconbitmap("icon.ico")
 
         def save_data():
-        if not running:
+        if not running: #prevents double starting the program which causes problems
             age = int(age_entry.get())
             gender = str(gender_var.get())
 
