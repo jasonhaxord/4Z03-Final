@@ -98,7 +98,7 @@ def analyze_arduino():
                                              len(
                                                  all_peak_times) - 1)
                 all_peak_times.clear()  # cleaning
-                print(f'Average BPM: {60 / average_difference}')  # debugging
+                #print(f'Average BPM: {60 / average_difference}')  # debugging
                 update_bpm(60 / average_difference)  # updates bpm for music player and GUI
                 counter = 0  # reset counter
 
@@ -115,11 +115,7 @@ def main():
         if not running: #prevents double starting the program which causes problems
             age = int(age_entry.get())
             gender = str(gender_var.get())
-
-            #set initial bpm based on paper
-            print(gender)
-            print(age)
-
+            #set initial bpm according to paper outlined in proposal
             if gender == "Female":
                 if age < 70:
                     update_bpm(113)
@@ -151,7 +147,7 @@ def main():
 
     def start_button():
         global running
-        if not running:
+        if not running: #prevents double starting the program which causes problems
             running = True
             #  this lets the program "multitask", so one thread is checking bpm updates, one thread is playing the audio
             # Start the beat loop in a separate thread
@@ -161,18 +157,18 @@ def main():
             analysis_thread = threading.Thread(target=analyze_arduino)
             analysis_thread.start()
 
-    def quit_button():
+    def quit_button(): #kill it with fire
         global running
         running = False
         root.destroy()
 
-    # Age
+    # Age UI element
     age_label = tk.Label(root, text="Age:", font=("Helvetica", 12))
     age_label.grid(row=0, column=0, padx=10, pady=10, sticky='w')
     age_entry = tk.Entry(root, font=("Helvetica", 12))
     age_entry.grid(row=0, column=1, padx=10, pady=10)
 
-    # Gender
+    # Gender UI element
     gender_label = tk.Label(root, text="Gender:", font=("Helvetica", 12))
     gender_label.grid(row=0, column=2, sticky='w', padx='50')
     gender_options = ["Male", "Female"]
@@ -181,7 +177,7 @@ def main():
     gender_dropdown.config(width=10, font=("Helvetica", 12))
     gender_dropdown.grid(row=0, column=2, padx='150')
 
-    # Save button
+    # Save button UI element
     save_button = tk.Button(root, text="Save Client Info", font=("Helvetica", 12), command=save_data)
     save_button.grid(row=0, column=4, padx=10, pady=10)
     # Add text for current BPM value
@@ -191,7 +187,7 @@ def main():
     # Add an extra column to center the slider
     tk.Label(root, text="", width=2).grid(row=2, column=0)
 
-    # BPM text and Slider
+    # BPM text and Slider UI element
     bpm_slider = ttk.Scale(root, from_=30, to=240, orient='horizontal', length=400,
                            command=lambda val: update_bpm(val))
     bpm_slider.set(bpm)  # set default BPM value
@@ -204,11 +200,11 @@ def main():
     max_bpm_label = tk.Label(root, text='240', font=("Helvetica", 12))
     max_bpm_label.grid(row=2, column=3, pady=10)
 
-    # Start Button
+    # Start Button UI element
     start_button = tk.Button(root, text='Start', font=("Helvetica", 12), command=start_button)
     start_button.grid(row=4, column=2)
 
-    # Quit Button
+    # Quit Button UI element
     quit_button = tk.Button(root, text='Quit', font=("Helvetica", 12), command=quit_button)
     quit_button.grid(row=5, column=2, pady='30')
 
@@ -221,13 +217,10 @@ def main():
     # Schedule the update_slider_position function to be called every 100 milliseconds
     root.after(100, update_slider_position)
 
-    # Schedule the update_slider_position function to be called every 100 milliseconds
-    root.after(100, update_slider_position)
-
-    root.mainloop()  # gui loop, this will run endlessly until program exits
+    root.mainloop()  # gui loop, this will run endlessly until program exits to keep the GUI elements updated 
 
 
-# this makes the program not "crash to exit"
+# this makes the program not "crash to exit" when i force quit it
 if __name__ == '__main__':
     try:
         main()
