@@ -153,8 +153,7 @@ def main():
         global running
         if not running:
             running = True
-            # do not ask me what the fuck is going on from lines 132-136, i do not know i only know this makes it work gud
-            # best guess: this lets the program "multitask", so one thread is checking bpm updates, one thread is playing the audio
+            #  this lets the program "multitask", so one thread is checking bpm updates, one thread is playing the audio
             # Start the beat loop in a separate thread
             loop_thread = threading.Thread(target=play_loop)
             loop_thread.start()
