@@ -80,7 +80,7 @@ def analyze_arduino():
 
             peak_times = [combined_array[_time_] for _time_ in
                           find_peaks(list(combined_array.keys()), height=95, distance=5)[1][
-                              'peak_heights']]  # finds peak times based on analyzing acceleration array, then looking for its corresponding time as a dictionary key. Python OP.
+                              'peak_heights']]  # finds peak times based on analyzing acceleration array, then looking for its corresponding time using the accleration dictionary key. 
 
             print(peak_times)  # debugging purposes, useless
 
