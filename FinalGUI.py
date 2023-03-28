@@ -116,7 +116,7 @@ def main():
             age = int(age_entry.get())
             gender = str(gender_var.get())
 
-            # Do something with the data
+            #set initial bpm based on paper
             print(gender)
             print(age)
 
