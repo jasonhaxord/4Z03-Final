@@ -7,6 +7,7 @@ import sys
 import tkinter as tk
 from tkinter import ttk
 import threading
+import serial.tools.list_ports
 
 # holy mother of imports
 bpm = 0
@@ -51,8 +52,18 @@ def play_loop():
 
 # Function to read Arduino data from the USB port, analyze it for peaks, and update with BPM
 def analyze_arduino():
-    arduino_data = serial.Serial('com3',
-                                 115200)  # the way that this is written, it will only work on usb port labelled 'com3'. could be a problem, but we'll see.
+    import serial.tools.list_ports
+    #neat little thing to find which port Arduino is plugged into
+    portName = ""
+    ports = list(serial.tools.list_ports.comports())
+    for p in ports:
+        print(p)
+        if "CH340" in p.description:
+            portName = p[0]
+            print(portName)
+
+
+    arduino_data = serial.Serial(portName, 115200)  # the way that this is written, it will only work on usb port labelled 'com3'. could be a problem, but we'll see.
 
     # one thing to note: time is given in seconds since Jan 1, 1970 12:00:00 UTC. Since we're working in seconds and subtracting between times, this doesn't matter.
 
@@ -70,6 +81,7 @@ def analyze_arduino():
 
         while not arduino_data.inWaiting():  # this will freeze the program if there's a pileup of data from arduino. not a problem.
             pass
+        portName = ""
 
         data_packet = float(str(arduino_data.readline(),
                                 'utf-8').strip())  # Get, clean and convert reply to a number instead of text (thanks arduino)
@@ -80,7 +92,7 @@ def analyze_arduino():
 
             peak_times = [combined_array[_time_] for _time_ in
                           find_peaks(list(combined_array.keys()), height=95, distance=5)[1][
-                              'peak_heights']]  # finds peak times based on analyzing acceleration array, then looking for its corresponding time using the accleration dictionary key. 
+                              'peak_heights']]  # finds peak times based on analyzing acceleration array, then looking for its corresponding time using the accleration dictionary key.
 
             print(peak_times)  # debugging purposes, useless
 
@@ -111,7 +123,7 @@ def main():
     root.title('Gait Rhythm Trainer ver 0.1')
     root.iconbitmap("icon.ico")
 
-        def save_data():
+    def save_data():
         if not running: #prevents double starting the program which causes problems
             age = int(age_entry.get())
             gender = str(gender_var.get())
@@ -217,7 +229,7 @@ def main():
     # Schedule the update_slider_position function to be called every 100 milliseconds
     root.after(100, update_slider_position)
 
-    root.mainloop()  # gui loop, this will run endlessly until program exits to keep the GUI elements updated 
+    root.mainloop()  # gui loop, this will run endlessly until program exits to keep the GUI elements updated
 
 
 # this makes the program not "crash to exit" when i force quit it
