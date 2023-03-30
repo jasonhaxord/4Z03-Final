@@ -8,7 +8,7 @@ void setup()
 {
   Serial.begin(115200);
 
-  Wire.begin();
+  Wire.begin(); 
 
   myIMU.begin();
 
@@ -23,16 +23,13 @@ void loop()
   if (myIMU.dataAvailable() == true)
   {
     float x = myIMU.getAccelX();
-    float y = myIMU.getAccelY();
-    float z = myIMU.getAccelZ();
 
   
-  float resultant = abs(x*x);
+  float resultant = abs(x*x); //squaring x to amplify true steps (big peaks) while keeping noise small (small peaks)
 
 
-    Serial.print(resultant, 4);
-    //Serial.print(millis(), 2);
-    Serial.println();
+    Serial.print(resultant, 4); //export/print resultant to 4 decimal places to serial (usb port)
+    Serial.println(); //do the print 
   }
 
 }
