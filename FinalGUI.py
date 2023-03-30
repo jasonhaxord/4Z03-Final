@@ -224,7 +224,7 @@ def main():
 
         bpm_slider.set(bpm)
         current_bpm_label.config(text=f'Current BPM: {bpm}')
-        root.after(100, update_slider_position)
+        root.after(100, update_slider_position) #after 100 millliseconds of the UI Window, update slider position to current BPM
 
     # Schedule the update_slider_position function to be called every 100 milliseconds
     root.after(100, update_slider_position)
