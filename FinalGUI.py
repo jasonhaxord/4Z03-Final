@@ -9,9 +9,9 @@ from tkinter import ttk
 import threading
 import serial.tools.list_ports
 
-# holy mother of imports
+
 bpm = 0
-CHUNK = 1024  # idk dont change this
+CHUNK = 1024  
 wf = wave.open("sample2.wav", 'rb')  # reads .wav file
 p = pyaudio.PyAudio()
 
