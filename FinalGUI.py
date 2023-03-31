@@ -169,7 +169,7 @@ def main():
             analysis_thread = threading.Thread(target=analyze_arduino)
             analysis_thread.start()
 
-    def quit_button(): #kill it with fire
+    def quit_button(): 
         global running
         running = False
         root.destroy()
@@ -239,4 +239,4 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print('Interrupted')
         running = False
-        sys.exit(69)  # yea
+        sys.exit(0)  
