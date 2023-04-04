@@ -23,8 +23,7 @@ void loop()
   if (myIMU.dataAvailable() == true)
   {
     float x = myIMU.getAccelX();
-
-  
+    
   float resultant = abs(x*x); //squaring x to amplify true steps (big peaks) while keeping noise small (small peaks)
 
 
